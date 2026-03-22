@@ -2,6 +2,9 @@ import React from "react";
 import { useState, useCallback, useEffect, useRef } from "react";
 import PasswordDisplay from "../components/PasswordDisplay";
 import Controls from "../components/Controls";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 const PasswordGenerator = () => {
   const [length, setLength] = useState(8);
@@ -48,12 +51,16 @@ const PasswordGenerator = () => {
       await navigator.clipboard.writeText(password);
       // small feedback: focus the input so user sees it
       passwordRef.current?.focus();
+         toast.success("Copied to clipboard!");
     } catch (err) {
       // fallback: select input
       passwordRef.current?.select();
       console.error("Copy failed:", err);
+          toast.error("Copy failed!");
     }
   });
+  
+ const notify = () => toast("Wow so easy!");
 
   return (
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
@@ -65,6 +72,7 @@ const PasswordGenerator = () => {
         setShowPassword={setShowPassword}
         onCopy={copyPasswordToClipboard}
         passwordRef={passwordRef}
+        testNotify={notify}
       />
 
       <Controls

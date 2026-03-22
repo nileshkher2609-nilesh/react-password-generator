@@ -1,4 +1,5 @@
 import React from "react";
+  import { ToastContainer, toast } from 'react-toastify';
 
 const PasswordDisplay = ({
   password,
@@ -6,7 +7,9 @@ const PasswordDisplay = ({
   setShowPassword,
   onCopy,
   passwordRef,
+  testNotify
 }) => {
+
   return (
     <div className="flex shadow rounded-lg overflow-hidden mb-4">
       <input
@@ -14,6 +17,8 @@ const PasswordDisplay = ({
         value={password}
         className="outline-none w-full py-1 px-3 bg-gray-900 text-white"
         placeholder="Password"
+        readOnly
+        ref = {passwordRef}
       />
       <button
         onClick={() => setShowPassword((prev) => !prev)}
@@ -24,12 +29,13 @@ const PasswordDisplay = ({
         {showPassword ? "Hide Password" : "Show Password"}
       </button>
       <button
-        onClick={onCopy}
+      onClick={onCopy}
         className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0"
         aria-label="Copy password"
       >
         Copy
       </button>
+
       {/* Always use callbackfn if the new state depends on old state */}
     </div>
   );
